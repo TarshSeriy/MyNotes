@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}{{ note.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h2>{{ note.title }}</h2>
+                </div>
+                <div class="card-body">
+                    <p>{{ note.content }}</p>
+                    <p><strong>Category:</strong> {{ note.category.name }}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ url_for('notes.edit_note', id=note.id) }}" class="btn btn-warning">Edit</a>
+                    <form action="{{ url_for('notes.delete_note', id=note.id) }}" method="POST" style="display: inline;">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure gay?');">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Categories{% endblock %}
+
+{% block content %}
+<div class="container mb-5">
+  <div class="row mb-3">
+    <div class="col-md-12 text-center">
+      <h2 class="display-4">Categories</h2>
+      <a href="{{ url_for('categories.create_category') }}" class="btn btn-success mt-3 mb-4">Create New Category</a>
+    </div>
+  </div>
+  {% if categories %}
+    <div class="table-responsive">
+      <table class="table table-striped-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th>Name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for category in categories %}
+          <tr>
+            <td>{{ category.name }}</td>
+            <td>
+              <a href="{{ url_for('categories.edit_category', category_id=category.id) }}" class="btn btn-warning btn-sm">Edit</a>
+
+              <form action="{{ url_for('categories.delete_category', category_id=category.id) }}" method="POST" style="display:inline;">
+                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure bro?');">Delete</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="text-center text-muted">No categories available. Add category sucker</p>
+  {% endif %}
+</div>
+
+{%endblock %}

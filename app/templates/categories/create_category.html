@@ -1,0 +1,27 @@
+{%extends 'base.html' %}
+{% block title %}Create new Category{% endblock %}
+
+{% block content %}
+<div class="container mb-5">
+    <h2>Create New Category</h2>
+    <div class="card">
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('categories.create_category') }}">
+                {{ form.hidden_tag() }}
+
+                <div class="form-group">
+                    <label for="name">Category Name</label>
+                    {{ form.name(class="form-control", id="name", placeholder="Enter category name") }}
+                    {% if form.name.errors %}
+                        <div class="text-danger mt-2">
+                            {{ form.name.errors[0] }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <button type="submit" class="btn btn-success mt-3">Create Category</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
